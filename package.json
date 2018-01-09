@@ -1,0 +1,12 @@
+{
+  "name": "fake-server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "yarn run fakeserver",
+    "fakeserver": "json-server --watch db.json --port 8080"
+  },
+  "dependencies": {
+    "json-server": "^0.12.1"
+  }
+}
