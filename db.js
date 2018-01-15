@@ -1,5 +1,8 @@
-require('dotenv').config()
+require('dotenv').config();
 const config = require('./config');
+const faker = require('faker');
+faker.locale = "es";
+
 
 const authors = ["Pepete", "Juanete", "Santiaguillo"];
 
@@ -29,7 +32,7 @@ const createProfile = (name) => {
 module.exports = () => {
   const totalPosts = config.postsNumber;
   const commentsPerPost = config.commentsPerPost;
-  var data = {
+  let data = {
     posts: [],
     comments: [],
     profiles: [],
@@ -37,20 +40,29 @@ module.exports = () => {
 
   // Posts
   for (let i = 0; i < totalPosts; i++) {
-    data.posts.push(createPost(i, 'Title ' + i, authors[i % authors.length]));
+    let postId = i;
+    let postBody = faker.lorem.sentence();
+    let authorName = authors[i % authors.length];
+    data.posts.push(createPost(postId, postBody, authorName));
   }
 
   // Comments
   for (let i = 0; i < totalPosts * commentsPerPost; i++) {
-    data.comments.push(createComment(i, 'Comments body ' + i, i % totalPosts));
+    let commentId = i;
+    let commentBody = faker.lorem.paragraph();
+    let postId = i % totalPosts;
+
+    data.comments.push(createComment(commentId, commentBody, postId));
   }
 
   // profiles
   for (let i = 0; i < authors.length; i++) {
-    data.profiles.push(createProfile(authors[i]));
+    let authorId = authors[i];
+    data.profiles.push(createProfile(authorId));
   }
 
-  console.log(data);
+  //console.log(data);
+  //console.log(faker.helpers.createCard());
 
   return data;
 };
