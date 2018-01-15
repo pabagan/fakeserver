@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "yarn run fakeserver",
-    "fakeserver": "json-server --watch db.js --port 8080"
+    "fakeserver": "json-server --watch db.js --port 8080 --routes routes.json"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
